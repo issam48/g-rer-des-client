@@ -5,12 +5,17 @@
 package gerer_des_clients;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -18,26 +23,33 @@ import javafx.stage.Stage;
  */
 public class Gerer_Des_Clients extends Application {
     
+  private double x =0;
+    private double y= 0;
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    public void start(Stage stage) throws Exception {
+     
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login_Admin/LoginFXML.fxml"));
+;
+        
+        Scene scene = new Scene(root);
+        root.setOnMousePressed((MouseEvent event)->{
+            x=event.getSceneX();
+            y = event.getSceneY();
+        });
+        root.setOnMouseDragEntered((MouseEvent event)->{
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getSceneY() - y);
+            stage.setOpacity(.8);
             
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
         });
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.setOnMouseReleased((MouseEvent event)->{
+            stage.setOpacity(1);
+        });
         
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**

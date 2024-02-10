@@ -2,6 +2,45 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.left-form{
+    -fx-background-color: linear-gradient(to bottom right,#0c0909,#333131);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+.right-form{
+    -fx-background-color:#fff;
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .4px 0px;
+}
+.close{
+    -fx-background-color:Transparent;
+    -fx-cursor:hand;
+}
+.close:hover{
+    -fx-background-color: #f11212;
 
+}
+.textfield{
+    -fx-background-color:linear-gradient(to bottom, #efefef,#eee);
+    -fx-background-radius:2px;
+    -fx-border-width:.4px ;
+    -fx-border-color:#000;
+    -fx-font-size:13px;
+    -fx-border-width:.8px
+}
+.textfield:focused{
+    -fx-background-color:#fff;
+    -fx-border-color:linear-gradient(to bottom right,#090909,#3c3b3b);
+    -fx-border-width:.8px;
+}
+.login-btn{
+    -fx-background-color:linear-gradient(to bottom,#090506,#333131);
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:Arial;
+    -fx-cursor:hand;
+
+}
+.login-btn:hover{
+    -fx-background-color:#382f31
 }
