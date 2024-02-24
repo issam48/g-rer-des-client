@@ -27,25 +27,23 @@ public class Gerer_Des_Clients extends Application {
     private double y= 0;
     @Override
     public void start(Stage stage) throws Exception {
-     
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login_Admin/LoginFXML.fxml"));
-;
         
         Scene scene = new Scene(root);
+        root.setOnMouseDragged((MouseEvent event)->{
+            
+           stage.setX(event.getScreenX() - x);
+           stage.setY(event.getScreenY() - y);
+          
+            
+        });
         root.setOnMousePressed((MouseEvent event)->{
             x=event.getSceneX();
             y = event.getSceneY();
         });
-        root.setOnMouseDragEntered((MouseEvent event)->{
-            stage.setX(event.getScreenX() - x);
-            stage.setY(event.getSceneY() - y);
-            stage.setOpacity(.8);
-            
-        });
         
-        root.setOnMouseReleased((MouseEvent event)->{
-            stage.setOpacity(1);
-        });
+        
+         
         
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);

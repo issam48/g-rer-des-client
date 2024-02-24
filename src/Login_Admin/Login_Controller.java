@@ -4,6 +4,7 @@
  */
 package Login_Admin;
 
+import dashbord.get_data;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import gerer_des_clients.database;
 import java.net.URL;
@@ -24,8 +25,10 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -57,10 +60,11 @@ public class Login_Controller implements Initializable {
      private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
-   
+    private double x=0;
+    private double y=0;
      public void login(){
          
-        String sql="SELECT * FROM admin WHERE  nom = ? AND  password= ?";
+        String sql="SELECT * FROM admins WHERE  nom = ? AND  password= ?";
         connect = database.connectDb();
         
         try{
@@ -102,10 +106,23 @@ public class Login_Controller implements Initializable {
                    
                     
                     loginbtn.getScene().getWindow().hide();
+                    get_data.username=username.getText();
                      Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dashbord/dashbord_xml.fxml"));
                     
                     Stage stage=new Stage();
                     Scene scene = new Scene(root);
+                    
+                    root.setOnMousePressed((MouseEvent event)->{
+                        x =event.getSceneX();
+                        y=event.getSceneY();
+                    });
+                    
+                    root.setOnMouseDragged((MouseEvent event)->{
+                        stage.setX(event.getScreenX() - x);
+                        stage.setY(event.getScreenY() - y);
+                        
+                    });
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     
                     stage.setScene(scene);
                     stage.show();
